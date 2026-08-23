@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nikita L. Polomoshnov</title>
+<meta name="description" content="Physics-informed, interpretable machine learning for computational drug design — MSU Faculty of Bioengineering &amp; Bioinformatics and the Institute of Biomedical Chemistry, Moscow.">
+<meta property="og:title" content="Nikita L. Polomoshnov">
+<meta property="og:description" content="Physics-informed, interpretable machine learning for computational drug design.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://doctawho42.github.io/">
+<style>
+  :root{
+    --bg:#fbfaf8; --fg:#1b1a18; --mut:#6a655f; --line:#e6e1da;
+    --card:#ffffff; --accent:#1f3864; --accentlink:#26507f;
+    --chip:#f1ede7;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#16171a; --fg:#e7e5e1; --mut:#9a948c; --line:#2b2d31;
+      --card:#1c1e22; --accent:#9fbce6; --accentlink:#9fbce6;
+      --chip:#24262b;
+    }
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; background:var(--bg); color:var(--fg);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:64px 22px 96px}
+  h1{font-size:31px; letter-spacing:-.02em; margin:0 0 4px; font-weight:680}
+  .tag{color:var(--mut); font-size:15.5px; margin:0 0 14px}
+  .contact{font-size:14.5px; margin:0 0 4px; display:flex; flex-wrap:wrap; gap:4px 14px}
+  .contact a{color:var(--accentlink); text-decoration:none; border-bottom:1px solid transparent}
+  .contact a:hover{border-bottom-color:currentColor}
+  h2{font-size:12px; text-transform:uppercase; letter-spacing:.11em; color:var(--mut);
+    font-weight:700; margin:44px 0 4px; padding-bottom:8px; border-bottom:1px solid var(--line)}
+  p{margin:14px 0}
+  .lead{font-size:17px; margin-top:26px}
+  .entry{margin:22px 0}
+  .entry h3{font-size:17px; margin:0 0 2px; font-weight:640; line-height:1.4}
+  .meta{color:var(--mut); font-size:13.5px; margin:0 0 7px; font-variant:small-caps; letter-spacing:.02em}
+  .entry p{margin:6px 0 8px; font-size:15px}
+  .links{font-size:13.5px; display:flex; flex-wrap:wrap; gap:4px 16px}
+  .links a{color:var(--accentlink); text-decoration:none; border-bottom:1px solid transparent}
+  .links a:hover{border-bottom-color:currentColor}
+  .withheld{color:var(--mut); font-style:italic}
+  a.plain{color:var(--accentlink); text-decoration:none; border-bottom:1px solid var(--line)}
+  a.plain:hover{border-bottom-color:currentColor}
+  footer{margin-top:52px; padding-top:18px; border-top:1px solid var(--line);
+    color:var(--mut); font-size:13.5px}
+  code{font:13px ui-monospace,SFMono-Regular,Menlo,monospace; background:var(--chip);
+    padding:1px 5px; border-radius:4px}
+</style>
+</head>
+<body>
+<main class="wrap">
+
+  <header>
+    <h1>Nikita L. Polomoshnov</h1>
+    <p class="tag">Physics-informed, interpretable machine learning for computational drug design.<br>
+      MSU Faculty of Bioengineering &amp; Bioinformatics · Institute of Biomedical Chemistry (IBMC), Moscow.</p>
+    <nav class="contact">
+      <a href="mailto:nikitapol@fbb.msu.ru">nikitapol@fbb.msu.ru</a>
+      <a href="https://github.com/doctawho42">github.com/doctawho42</a>
+      <a href="https://orcid.org/0000-0000-0000-0000">ORCID</a>
+      <a href="CV_Polomoshnov_EN.pdf">CV (PDF)</a>
+    </nav>
+  </header>
+
+  <p class="lead">I work on one question that keeps recurring across unrelated sciences: when a model reports a
+    quantity, is the uncertainty attached to it a usable object or only a plausible-looking one? The method is the
+    same each time — take something the field reports as a single number, prove that it splits exactly, measure
+    which term binds, and publish honestly where my own intervention failed. Two of my three manuscripts report a
+    pre-registered negative result as their central finding.</p>
+
+  <h2>Writing</h2>
+
+  <div class="entry">
+    <h3>Ground Truth That Does Not Ground: substituting reference σ-profiles degrades COSMO-SAC solubility prediction</h3>
+    <p class="meta">with A. V. Rudik · under review, J. Chem. Inf. Model.</p>
+    <p>A graph network trains through a fixed COSMO-SAC layer, made differentiable, and an exact decomposition
+      separates the fixed map's own misspecification from what its inputs fail to carry. Substituting the tabulated
+      reference profile at inference makes prediction worse at every seed — grounding names two operations, and only
+      one of them has a measured sign.</p>
+    <div class="links">
+      <a href="tgnn-solv/">project page</a>
+      <a href="tgnn-solv/">paper &amp; SI</a>
+      <a href="https://github.com/doctawho42">code</a>
+    </div>
+  </div>
+
+  <div class="entry">
+    <h3>What Cycle Closure Can and Cannot See in a Relative Binding Free Energy Network</h3>
+    <p class="meta">sole author · in preparation (J. Chem. Theory Comput.)</p>
+    <p>The per-edge BAR uncertainty a free-energy protocol already reports, once checked against replicate scatter on
+      1145 public OpenFE binding edges, is calibrated well enough to serve as the null of a cycle-closure
+      goodness-of-fit test. A gradient–cycle decomposition then fixes exactly what such a test can and cannot see:
+      the per-edge signal reproduces across replicates; a thresholded list of “bad” systems does not.</p>
+    <div class="links">
+      <a href="https://github.com/OpenFreeEnergy/IndustryBenchmarks2024/issues/331">OpenFE issue #331 — observability audit</a>
+      <a href="https://github.com/OpenFreeEnergy/IndustryBenchmarks2024/issues/332">#332 — cdk8 name collision</a>
+    </div>
+  </div>
+
+  <div class="entry">
+    <h3>Machine-learning evaluation methodology</h3>
+    <p class="meta">sole author · under review, 2027</p>
+    <p class="withheld">A manuscript on how much of a published leaderboard's order actually survives its own
+      unstated evaluation choices is under review at a major venue. Title and details will appear here after review.</p>
+  </div>
+
+  <h2>Software</h2>
+  <p><a class="plain" href="https://way2drug.com/">MetaTox</a> on the way2drug platform — a metabolite-prediction
+    service; Application Note in preparation.</p>
+
+  <h2>Open source</h2>
+  <p>Public contributions to the OpenFreeEnergy
+    <a class="plain" href="https://github.com/OpenFreeEnergy/IndustryBenchmarks2024">IndustryBenchmarks2024</a>
+    dataset — a 15-company industry FEP benchmark — reporting a per-edge observability audit with reproducible
+    tables and a self-test (<a class="plain" href="https://github.com/OpenFreeEnergy/IndustryBenchmarks2024/issues/331">#331</a>)
+    and a ligand-name collision in the cdk8 set
+    (<a class="plain" href="https://github.com/OpenFreeEnergy/IndustryBenchmarks2024/issues/332">#332</a>).</p>
+
+  <footer>
+    Reproducibility first: every figure regenerates from one command, and the theorem constants are unit tests.
+    Hand-written HTML, no build step. · <a class="plain" href="mailto:nikitapol@fbb.msu.ru">nikitapol@fbb.msu.ru</a>
+  </footer>
+
+</main>
+</body>
+</html>
