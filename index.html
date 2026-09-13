@@ -116,7 +116,7 @@
   <p class="lead">I work on one question that keeps recurring across unrelated sciences: when a model reports a
     quantity, is the uncertainty attached to it a usable object or only a plausible-looking one? The method is the
     same each time — take something the field reports as a single number, prove that it splits exactly, measure
-    which term binds, and publish honestly where my own intervention failed. Two of my three manuscripts report a
+    which term binds, and publish honestly where my own intervention failed. Two of my four manuscripts report a
     pre-registered negative result as their central finding.</p>
 
   <h2>Writing</h2>
@@ -181,7 +181,7 @@
 
   <div class="entry">
     <h3>What Cycle Closure Can and Cannot See in a Relative Binding Free Energy Network</h3>
-    <p class="meta">sole author · preprint · submitted, J. Chem. Theory Comput.</p>
+    <p class="meta">sole author · preprint</p>
     <p>The per-edge BAR uncertainty a free-energy protocol already reports, once checked against replicate scatter on
       1145 public OpenFE binding edges, is calibrated well enough to serve as the null of a cycle-closure
       goodness-of-fit test. A gradient–cycle decomposition then fixes exactly what such a test can and cannot see:
@@ -255,6 +255,49 @@
       <a href="https://github.com/OpenFreeEnergy/IndustryBenchmarks2024/issues/331">OpenFE issue #331 — observability audit</a>
       <a href="https://github.com/OpenFreeEnergy/IndustryBenchmarks2024/issues/332">#332 — cdk8 name collision</a>
       <a href="https://doi.org/10.26434/chemrxiv.15007931/v3">preprint (ChemRxiv)</a>
+    </div>
+  </div>
+
+  <div class="entry">
+    <h3>Metabolite Predictors Have a Multiverse Problem</h3>
+    <p class="meta">with A. V. Rudik · manuscript, J. Chem. Inf. Model.</p>
+    <p>Because the predictor is a bank of reaction rules plus a ranking, recall@k factorises exactly into what the
+      bank can produce at all, what survives selection, and what the ranking puts inside the budget. Most of what
+      is missing turns out to be out of reach of any ranking. The comparison against four published predictors is
+      then reported as a grid over declared evaluation choices rather than as one number, and the grid moves its
+      own verdict at 6 of 9 output budgets.</p>
+
+    <figure class="viz">
+      <div class="figscroll"><svg viewBox="0 0 640 118" role="img"
+           aria-label="Recall on the comparison set decomposed into three parts: 0.7023 reached by the system, 0.1082 within reach of a better ranking, and 0.1895 that no ranking can reach because the rule bank never produces those structures.">
+        <g class="val" text-anchor="middle">
+          <text x="223.7" y="24">0.7023</text>
+          <text x="458.7" y="24">0.1082</text>
+          <text x="545.0" y="24">0.1895</text>
+        </g>
+        <rect x="20" y="32" width="407.3" height="34" rx="3" fill="var(--viz-pos)"><title>reached by the exhaustive configuration at k = 50</title></rect>
+        <rect x="427.3" y="32" width="62.8" height="34" rx="3" fill="var(--viz-empty)" stroke="var(--viz-pos)" stroke-width="1.5"><title>headroom a better ranking could take</title></rect>
+        <rect x="490.1" y="32" width="109.9" height="34" rx="3" fill="var(--viz-neg)" opacity="0.85"><title>the bank never produces these structures</title></rect>
+        <g class="sublbl" text-anchor="middle">
+          <text x="223.7" y="90">reached</text>
+          <text x="458.7" y="90">ranking</text>
+          <text x="545.0" y="90">unreachable</text>
+        </g>
+        <text class="sublbl" x="20" y="112">0</text>
+        <text class="sublbl" x="600" y="112" text-anchor="end">1.0</text>
+      </svg></div>
+      <figcaption>Recall on the comparison set, split into the three terms it factorises into. The bank ceiling is
+        0.8105 and the exhaustive configuration reaches 0.7023 at k&nbsp;=&nbsp;50, which is 86.7% of what the bank
+        makes achievable. Of the rest, only 0.1082 is something a better ranking could take; the remaining 0.1895
+        is out of reach of every ranking, because the bank never produces those structures. Of the 475 uncovered
+        references, 337 belong to a transformation type the bank does not contain at all. The bottleneck is the
+        bank, not the ranking.</figcaption>
+    </figure>
+
+    <div class="links">
+      <a href="grail/">project page</a>
+      <a href="https://github.com/doctawho42/GRAIL">code &amp; rule bank</a>
+      <a href="https://way2drug.com/">MetaTox</a>
     </div>
   </div>
 

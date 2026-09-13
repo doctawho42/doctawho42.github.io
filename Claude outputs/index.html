@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Metabolite Predictors Have a Multiverse Problem</title>
+<meta name="description" content="A rule-grounded metabolite-structure predictor, and what happens to every published comparison once the undeclared evaluation choices are declared.">
+<meta property="og:title" content="Metabolite Predictors Have a Multiverse Problem">
+<meta property="og:description" content="recall@k factorises into coverage, selection and ranking. Most of what is missing is out of reach of any ranking.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://doctawho42.github.io/grail/">
+<style>
+  :root{
+    --bg:#fbfaf8; --fg:#1b1a18; --mut:#6a655f; --line:#e6e1da;
+    --card:#ffffff; --accent:#1f3864; --accentlink:#26507f;
+    --chip:#f1ede7;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#16171a; --fg:#e7e5e1; --mut:#9a948c; --line:#2b2d31;
+      --card:#1c1e22; --accent:#9fbce6; --accentlink:#9fbce6;
+      --chip:#24262b;
+    }
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; background:var(--bg); color:var(--fg);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:64px 22px 96px}
+  .back{font-size:13.5px; margin:0 0 26px}
+  .back a{color:var(--accentlink); text-decoration:none; border-bottom:1px solid transparent}
+  .back a:hover{border-bottom-color:currentColor}
+  h1{font-size:29px; letter-spacing:-.02em; margin:0 0 6px; font-weight:680; line-height:1.25}
+  .tag{color:var(--mut); font-size:15.5px; margin:0 0 14px}
+  .meta{color:var(--mut); font-size:13.5px; margin:0 0 6px; font-variant:small-caps; letter-spacing:.02em}
+  h2{font-size:12px; text-transform:uppercase; letter-spacing:.11em; color:var(--mut);
+    font-weight:700; margin:44px 0 4px; padding-bottom:8px; border-bottom:1px solid var(--line)}
+  p{margin:14px 0}
+  .lead{font-size:17px; margin-top:26px}
+  a.plain{color:var(--accentlink); text-decoration:none; border-bottom:1px solid var(--line)}
+  a.plain:hover{border-bottom-color:currentColor}
+  .links{font-size:13.5px; display:flex; flex-wrap:wrap; gap:4px 16px; margin:16px 0 0}
+  .links a{color:var(--accentlink); text-decoration:none; border-bottom:1px solid transparent}
+  .links a:hover{border-bottom-color:currentColor}
+  .tablescroll{overflow-x:auto; -webkit-overflow-scrolling:touch; margin:16px 0}
+  table{border-collapse:collapse; font-size:14px; min-width:520px; width:100%}
+  th,td{text-align:left; padding:7px 14px 7px 0; border-bottom:1px solid var(--line); vertical-align:top}
+  th{color:var(--mut); font-weight:600; font-size:12px; text-transform:uppercase; letter-spacing:.07em}
+  td.num{font-variant-numeric:tabular-nums; white-space:nowrap}
+  code{font:13px ui-monospace,SFMono-Regular,Menlo,monospace; background:var(--chip);
+    padding:1px 5px; border-radius:4px}
+  footer{margin-top:52px; padding-top:18px; border-top:1px solid var(--line);
+    color:var(--mut); font-size:13.5px}
+</style>
+</head>
+<body>
+<main class="wrap">
+
+  <p class="back"><a href="../">&larr; Nikita L. Polomoshnov</a></p>
+
+  <header>
+    <h1>Metabolite Predictors Have a Multiverse Problem</h1>
+    <p class="tag">A rule-grounded predictor for metabolite structures, and what happens to every published
+      comparison once the undeclared choices are declared.</p>
+    <p class="meta">N. L. Polomoshnov, A. V. Rudik (IBMC) &middot; manuscript, J. Chem. Inf. Model.</p>
+  </header>
+
+  <p class="lead">Comparing two metabolite predictors means choosing when two structures count as the same
+    molecule, how long a candidate list is allowed to be, and which substrates get scored. None of those choices
+    is declared in this literature, and none of them is decorative: varying the structure-matching criterion
+    alone moves the verdict at 6 of 9 output budgets. Reported as a grid rather than as one number, most of the
+    advantages this field prints stop being advantages.</p>
+
+  <div class="links">
+    <a href="https://github.com/doctawho42/GRAIL">code &amp; rule bank</a>
+    <a href="https://way2drug.com/">MetaTox on way2drug</a>
+    <a href="../">other work</a>
+  </div>
+
+  <h2>Abstract</h2>
+
+  <p>GRAIL is a rule-grounded metabolite-structure predictor: a bank of 7,581 reaction templates spanning 4,417
+    transformation types is applied to a substrate, and the candidates are ranked by reciprocal rank fusion.
+    Because the system is rules plus a ranking, recall@k factorises exactly into three terms &mdash; what the bank
+    can produce at all, what survives selection, and what the ranking puts inside the budget &mdash; so a single
+    recall number can be decomposed into the part that is a ranking failure and the part that is not.</p>
+
+  <p>On the comparison set the bank ceiling is 0.8105 and the exhaustive configuration reaches 0.7023 at
+    k&nbsp;=&nbsp;50, which is 86.7% of what the bank makes achievable at all. Of the shortfall, 0.1082 is within
+    reach of a better ranking and 0.1895 is not, because the bank never produces those structures. Of the 475
+    uncovered references, 337 belong to a transformation type the bank does not contain, 98 come from a rule that
+    exists but does not fire, and 40 cannot be typed. Between 0.6253 and 0.7095 of the shortfall is chemistry the
+    training corpus never contained. The bottleneck is the bank, not the ranking, and effort spent on ranking
+    cannot reach most of what is missing.</p>
+
+  <p>The comparison against four published predictors is reported as a grid over declared evaluation choices
+    rather than as a single table row, and the grid is what produces the title.</p>
+
+  <h2>What this is not</h2>
+
+  <p>This is not a claim that GRAIL is the best metabolite predictor. Read under a declared grid, most of its
+    apparent advantages do not survive. Against GLORYx at matched list length the difference is +0.0135
+    [&minus;0.0217, +0.0491] and the interval contains zero; the interactive configuration is worse than GLORYx,
+    at &minus;0.1203 [&minus;0.1685, &minus;0.0754]. The one advantage that survives both the multiplicity
+    correction and the control for list length is +0.1820 [+0.1446, +0.2208] over SyGMa. A comparison that looks
+    decisive at a fixed k can disappear once the two systems are made to emit lists of the same length, and
+    list length is not something this literature reports.</p>
+
+  <p>It is also not an independent rule bank. Of the 1,233 curated templates, 966 (78.3%) are taken verbatim from
+    other people's work: 611 from BioTransformer, 273 from SyGMa, 82 from GLORYx. The released bank contains
+    6,970 of the 7,581 templates; the 611 BioTransformer-derived templates are withheld for licence reasons, and
+    provenance for every template is recorded in <code>NOTICE.md</code>.</p>
+
+  <p>And the training corpus is not clean. It draws on four public sources, and the selection that produced it is
+    not recoverable from any record. Comparing the MetXBioDB pairs that entered the corpus against those that did
+    not, their transformation-type distributions differ by a total variation distance of 0.317, a permutation test
+    over 10,000 shuffles puts the chance of a distance that large at p&nbsp;=&nbsp;0.0001, and 156 of the dropped
+    pairs carry a transformation type the kept half never shows. Whoever assembled it was not sampling blind to
+    chemistry, and the filter is documented nowhere.</p>
+
+  <h2>Checking a number</h2>
+
+  <p>Every figure quoted above is established in a specific place in the manuscript, so that a reader can check a
+    claim without reconstructing the whole evaluation.</p>
+
+  <div class="tablescroll">
+  <table>
+    <thead><tr><th>Claim</th><th>Where it is established</th></tr></thead>
+    <tbody>
+      <tr><td>Bank ceiling 0.8105, exhaustive arm 0.7023 at k&nbsp;=&nbsp;50</td><td>Table&nbsp;2, budget sweep</td></tr>
+      <tr><td>Advantage over GLORYx and SyGMa at matched list length</td><td>Table&nbsp;3</td></tr>
+      <tr><td>Matching criterion moves the verdict at 6 of 9 budgets</td><td>Figure&nbsp;2, criterion grid</td></tr>
+      <tr><td>Configuration and version of every comparator</td><td>Section&nbsp;S34, Comparators</td></tr>
+      <tr><td>Decomposition of the 475 uncovered references</td><td>coverage analysis, main text</td></tr>
+      <tr><td>Corpus provenance: TVD 0.317, p&nbsp;=&nbsp;0.0001, 156 dropped pairs</td><td>corpus archaeology, SI</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2>Cost</h2>
+
+  <p>Two configurations are reported because they are different products, not two settings of one. The
+    interactive arm applies 30 rules, returns a median 15.6 candidates and takes 0.39&nbsp;s; the exhaustive arm
+    applies 7,580 rules, returns 98.1 candidates and takes 5.28&nbsp;s. The exhaustive arm is the one that
+    competes; the interactive arm is the one that can sit behind a web form. Reporting only the first would
+    overstate what the deployed service does.</p>
+
+  <h2>Data</h2>
+
+  <p>The corpus splits 9,011 / 1,020 / 1,198. The evaluated test set is 1,170 substrates carrying 2,597 reference
+    metabolites; the comparison set, on which every predictor is scored on the same substrates, is 291 substrates
+    and 665 references. Candidate pools are capped at 100 and fused with reciprocal rank fusion at
+    K&nbsp;=&nbsp;60. Code and the released rule bank are at
+    <a class="plain" href="https://github.com/doctawho42/GRAIL">github.com/doctawho42/GRAIL</a>, under GPL-3 and
+    LGPL as the provenance of each component requires.</p>
+
+  <footer>
+    Hand-written HTML, no build step. &middot;
+    <a class="plain" href="mailto:nikitapol@fbb.msu.ru">nikitapol@fbb.msu.ru</a> &middot;
+    <a class="plain" href="../">doctawho42.github.io</a>
+  </footer>
+
+</main>
+</body>
+</html>
